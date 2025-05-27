@@ -1,0 +1,11 @@
+# Exponentially damped sine signal.
+component ExpSine
+  extends Signal
+  parameter amplitude::Real
+  parameter damping::DampingCoefficient
+  parameter frequency::Frequency
+  parameter phase::Angle
+relations
+  y = if start_time<time then offset+amplitude*exp(-damping*(time-start_time))*sin(2*π*frequency*(time-start_time)+phase) else offset
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/ExpSine.svg"}}}
+end

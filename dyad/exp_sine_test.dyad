@@ -1,0 +1,21 @@
+test component ExpSineTest
+  integrator = Integrator()
+  signal = ExpSine(amplitude=1, damping=0.5, frequency=2, start_time=0.5, offset=0.5, phase=3.14)
+relations
+  connect(signal.y, integrator.u)
+metadata {
+  "Dyad": {
+    "tests": {
+      "case1": {
+        "stop": 7,
+        "atol": {"signal.y": 0.001, "integrator.x": 0.001},
+        "expect": {
+          "initial": {"signal.y": 0.5},
+          "signals": ["signal.y", "integrator.x"],
+          "final": {"signal.y": 0.50006, "integrator.x": 3.41826}
+        }
+      }
+    }
+  }
+}
+end

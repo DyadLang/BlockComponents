@@ -1,0 +1,13 @@
+test component Add3Test
+  c1 = Constant(k=1)
+  c2 = Constant(k=2)
+  c3 = Constant(k=3)
+  add3 = Add3()
+relations
+  connect(add3.u1, c1.y)
+  connect(add3.u2, c2.y)
+  connect(add3.u3, c3.y)
+metadata {
+  "Dyad": {"tests": {"case1": {"stop": 5, "expect": {"final": {"add3.y": 6}}}}}
+}
+end

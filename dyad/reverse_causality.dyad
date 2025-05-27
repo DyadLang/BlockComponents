@@ -1,0 +1,6 @@
+# Compute an output implicitly such that the two input signals are equal
+component ReverseCausality
+  extends BlockComponents.SI2SO
+relations
+  u1 = u2
+end

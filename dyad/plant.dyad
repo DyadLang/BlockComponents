@@ -1,0 +1,10 @@
+# Second order demo plant for testing controllers.
+test component Plant
+  extends SISO
+  variable x1::Real
+  variable x2::Real
+relations
+  der(x1) = x2
+  der(x2) = -x1-0.5*x2+u
+  y = 0.5*x1+x2
+end

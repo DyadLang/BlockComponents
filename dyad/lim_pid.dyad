@@ -1,0 +1,150 @@
+# PID controller with limited output, back calculation anti-windup compensation,
+# setpoint weighting and feed-forward
+#
+# The transfer function is:
+# ```math
+# y = k \\left[e + \\dfrac{1}{T_is}\\left(e + \\dfrac{y_{sat} - y}{N_iT_i}\\right)  + \\dfrac{T_ds}{1 + {\\dfrac{T_d}{N_d}s}}e \\right] + k_{ff}u_{ff}
+# ```
+component LimPID
+  extends SingleVariableController
+  u_ff = RealInput() [{
+    "Dyad": {
+      "placement": {
+        "icon": {"iconName": "input", "x1": 850, "y1": 950, "x2": 950, "y2": 1050, "rot": -90}
+      }
+    }
+  }]
+  add_p = Add(k1=wp, k2=-1) [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "input", "x1": 100, "y1": 100, "x2": 200, "y2": 200}}
+    }
+  }]
+  add_d = Add(k2=-1) [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "input", "x1": 100, "y1": 300, "x2": 200, "y2": 400}}
+    }
+  }]
+  add_i = Add3(k2=-1) [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "input", "x1": 100, "y1": 500, "x2": 200, "y2": 600}}
+    }
+  }]
+  proportional = Gain(k=1) [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "input", "x1": 300, "y1": 100, "x2": 400, "y2": 200}}
+    }
+  }]
+  derivative = Derivative(k=Td, T=max(Td/Nd, 1e-14), x0=xd0) [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "input", "x1": 300, "y1": 300, "x2": 400, "y2": 400}}
+    }
+  }]
+  integrator = Integrator(k=1/Ti, x0=xi0) [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "input", "x1": 300, "y1": 500, "x2": 400, "y2": 600}}
+    }
+  }]
+  add_pid = Add3() [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "input", "x1": 500, "y1": 300, "x2": 600, "y2": 400}}
+    }
+  }]
+  gain_pid = Gain(k=k) [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "input", "x1": 700, "y1": 300, "x2": 800, "y2": 400}}
+    }
+  }]
+  add_ff = Add() [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "input", "x1": 900, "y1": 300, "x2": 1000, "y2": 400}}
+    }
+  }]
+  limiter = Limiter(y_max=y_max, y_min=y_min) [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "input", "x1": 1100, "y1": 300, "x2": 1200, "y2": 400}}
+    }
+  }]
+  add_sat = Add(k1=1, k2=-1) [{
+    "Dyad": {
+      "placement": {
+        "icon": {"iconName": "input", "x1": 1100, "y1": 500, "x2": 1200, "y2": 600, "rot": 90}
+      }
+    }
+  }]
+  gain_track = Gain(k=1/(k*Ni)) [{
+    "Dyad": {
+      "placement": {
+        "icon": {"iconName": "input", "x1": 500, "y1": 700, "x2": 600, "y2": 800, "rot": 180}
+      }
+    }
+  }]
+  variable control_error::Real
+  # Gain of controller
+  parameter k::Real = 1
+  # Time constant of the integrator block
+  parameter Ti::Time = 0.5
+  # Time constant of the derivative block
+  parameter Td::Time = 0.1
+  # Maximum output
+  parameter y_max::Real = 1e300
+  # Minimum output
+  parameter y_min::Real = -y_min
+  # Set-point weight for proportional block
+  parameter wp::Real = 1
+  # Set-point weight for derivative block
+  parameter wd::Real = 0
+  # `Ni*Ti` is time constant of anti-windup compensation
+  parameter Ni::Real = 0.9
+  # Maximum derivative gain. Higher the value of `Nd`, the more ideal the
+  # derivative block gets (less filtering, higher high-frequency gain).
+  parameter Nd::Real = 10
+  # Gain of the feed-forward input
+  parameter k_ff::Real = 1
+  # Initial guess value for integrator output
+  parameter xi0::Real = 0
+  # Initial guess value for derivative output
+  parameter xd0::Real = 0
+relations
+  u_s = add_p.u1
+  u_s = add_i.u1
+  u_s = add_d.u1
+  u_m = add_p.u2
+  u_m = add_i.u2
+  u_m = add_d.u2
+  connect(add_p.y, proportional.u) [{"Dyad": {"edges": [{"S": 1, "E": 2}]}}]
+  connect(add_d.y, derivative.u) [{"Dyad": {"edges": [{"S": 1, "E": 2}]}}]
+  connect(add_i.y, integrator.u) [{"Dyad": {"edges": [{"S": 1, "E": 2}]}}]
+  connect(proportional.y, add_pid.u1) [{
+    "Dyad": {"edges": [{"S": 1, "M": [{"x": 450, "y": 150}, {"x": 450, "y": 320}], "E": 2}]}
+  }]
+  connect(derivative.y, add_pid.u2) [{"Dyad": {"edges": [{"S": 1, "E": 2}]}}]
+  connect(integrator.y, add_pid.u3) [{
+    "Dyad": {"edges": [{"S": 1, "M": [{"x": 450, "y": 550}, {"x": 450, "y": 380}], "E": 2}]}
+  }]
+  connect(add_pid.y, gain_pid.u) [{"Dyad": {"edges": [{"S": 1, "E": 2}]}}]
+  connect(gain_pid.y, add_ff.u1) [{
+    "Dyad": {"edges": [{"S": 1, "M": [{"x": 825, "y": 350}, {"x": 825, "y": 320}], "E": 2}]}
+  }]
+  u_ff = add_ff.u2
+  connect(add_ff.y, add_sat.u2) [{
+    "Dyad": {
+      "edges": [{"S": 2, "M": [{"x": 1120, "y": 480}, {"x": 1050, "y": 480}], "E": -1}],
+      "junctions": [{"x": 1050, "y": 350}]
+    }
+  }]
+  connect(add_ff.y, limiter.u) [{"Dyad": {"edges": [{"S": 1, "E": 2}]}}]
+  connect(limiter.y, add_sat.u1) [{
+    "Dyad": {
+      "edges": [
+        {"S": 1, "E": -1},
+        {"S": 2, "M": [{"x": 1180, "y": 480}, {"x": 1250, "y": 480}], "E": -1}
+      ],
+      "junctions": [{"x": 1250, "y": 350}]
+    }
+  }]
+  connect(add_sat.y, gain_track.u) [{"Dyad": {"edges": [{"S": 1, "M": [{"x": 1150, "y": 750}], "E": 2}]}}]
+  connect(gain_track.y, add_i.u3) [{
+    "Dyad": {"edges": [{"S": 1, "M": [{"x": 75, "y": 750}, {"x": 75, "y": 580}], "E": 2}]}
+  }]
+  y = limiter.y
+end

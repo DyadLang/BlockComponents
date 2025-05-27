@@ -1,0 +1,5 @@
+partial component SO
+  y = RealOutput() [
+    { "Dyad": { "placement": { "icon": { "x1": 950, "y1": 450, "x2": 1050, "y2": 550 } } } }
+  ]
+end

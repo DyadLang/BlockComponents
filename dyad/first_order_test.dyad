@@ -1,0 +1,18 @@
+test component FirstOrderTest
+  c = Constant(k=1)
+  pt1 = FirstOrder(k=1.2, T=0.1)
+relations
+  connect(c.y, pt1.u)
+metadata {
+  "Dyad": {
+    "experiments": {},
+    "tests": {
+      "case1": {
+        "stop": 10,
+        "atol": {"pt1.y": 0.001},
+        "expect": {"final": {"pt1.y": 1.2}, "signals": ["pt1.y"]}
+      }
+    }
+  }
+}
+end

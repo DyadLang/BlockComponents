@@ -1,0 +1,9 @@
+# Generate square signal.
+component Square
+  extends Signal
+  parameter amplitude::Real
+  parameter frequency::Frequency
+relations
+  y = if start_time<time then offset+(amplitude*(4*floor(frequency*(time-start_time))-2*floor(2*(time-start_time)*frequency)+1)) else offset
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/Square.svg"}}}
+end

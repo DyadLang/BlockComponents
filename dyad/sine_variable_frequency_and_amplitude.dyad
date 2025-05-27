@@ -1,0 +1,26 @@
+# Sine voltage source with variable frequency and amplitude
+#
+# To use, connect a signal source to amplitude and frequency,
+# and the component will output the resulting sine wave
+
+component SineVariableFrequencyAndAmplitude
+  # Initial phase of the sine wave 
+  parameter phi0::Real = 0
+  # Offset of the sine wave
+  parameter offset::Real = 0
+  # Phase of the sine wave
+  variable phi::Angle
+  amplitude = RealInput() [
+    { "Dyad": { "placement": { "icon": { "x1": -50, "y1": 250, "x2": 50, "y2": 350 } } } }
+  ]
+  frequency = RealInput() [
+    { "Dyad": { "placement": { "icon": { "x1": -50, "y1": 650, "x2": 50, "y2": 750 } } } }
+  ]
+  y = RealOutput() [
+    { "Dyad": { "placement": { "icon": { "x1": 950, "y1": 450, "x2": 750, "y2": 550 } } } }
+  ]
+relations
+  initial phi = phi0
+  der(phi) = 2*π*frequency
+  y = offset + amplitude*sin(phi)
+end

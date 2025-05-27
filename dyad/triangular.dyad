@@ -1,0 +1,10 @@
+# Generate triangular signal
+component Triangular
+  extends Signal
+  parameter amplitude::Real
+  parameter frequency::Frequency
+  final parameter period::Period = 1/frequency
+relations
+  y = if start_time<time then 4*amplitude*frequency*abs(abs(mod(time-period/4-start_time, period))-period/2)-amplitude else offset
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/Triangular.svg"}}}
+end

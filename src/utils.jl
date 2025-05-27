@@ -1,0 +1,1 @@
+square(r::StepRangeLen) = @. ^(r, 2)

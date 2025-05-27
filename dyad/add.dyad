@@ -1,0 +1,11 @@
+# Output the sum of the two scalar inputs.
+component Add
+  extends SI2SO()
+  # Gain of `u1`
+  parameter k1::Real = 1.0
+  # Gain of `u2`
+  parameter k2::Real = 1.0
+relations
+  y = k1*u1+k2*u2
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/Add.svg"}}}
+end

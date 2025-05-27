@@ -1,0 +1,11 @@
+
+test component InterpolationJuliaHubDatasetTest
+  interp = Interpolation(interpolation_type=QuadraticInterpolation, dataset=dataset)
+  structural parameter dataset::DyadDataset = DyadDataset("juliasimtutorials", "circuit_data", dependent_vars=["ampermeter.i(t)"], independent_var="timestamp")
+  variable y::Real
+relations
+  interp.u = time
+  interp.y = der(y)
+  initial y = 0
+metadata {"Dyad": {"tests": {"case1": {"start": 0.001, "stop": 0.1, "expect": {"signals": ["y"]}}}}}
+end

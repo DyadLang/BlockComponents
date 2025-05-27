@@ -1,0 +1,21 @@
+# A first-order filter with a single real pole at `s = -1/T` and gain `k`. The transfer function
+# is given by ``Y(s)/U(s) = ``
+#
+# ```
+# k
+# ───────
+# sT + 1
+# ```
+component FirstOrder
+  extends SISO
+  # State of FirstOrder filter
+  variable x::Real
+  # Time constant
+  parameter T::Real
+  # Gain
+  parameter k::Real = 1.0
+relations
+  der(x) = (k*u-x)/T
+  y = x
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/FirstOrder.svg"}}}
+end

@@ -1,0 +1,11 @@
+# Within the specified upper and lower limits, input signal is passed as output
+# signal. Outside these limits, corresponding limits are passed as output.
+component Limiter
+  extends SISO
+  # Maximum allowed input
+  parameter y_max::Real
+  # Minimum allowed input
+  parameter y_min::Real = -y_max
+relations
+  y = clamp(u, y_min, y_max)
+end

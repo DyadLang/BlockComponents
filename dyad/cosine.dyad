@@ -1,0 +1,10 @@
+# Generate Cosine signal.
+component Cosine
+  extends Signal
+  parameter amplitude::Real
+  parameter frequency::Frequency
+  parameter phase::Angle
+relations
+  y = if start_time<time then offset+amplitude*cos(2*π*frequency*(time-start_time)+phase) else offset
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/Cosine.svg"}}}
+end

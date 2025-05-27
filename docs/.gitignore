@@ -1,0 +1,7 @@
+/Manifest.toml
+/build
+/src/index.md
+/src/*/*
+!src/tests/data
+/index.md
+/pages.jl

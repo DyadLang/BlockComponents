@@ -1,0 +1,19 @@
+# Single-Variable continuous controller
+partial component SingleVariableController
+  # Connector of setpoint input signal
+  u_s = RealInput() [{
+    "Dyad": {"placement": {"icon": {"x1": -50, "y1": 300, "x2": 50, "y2": 400}}}
+  }]
+  # Connector of measurement input signal
+  u_m = RealInput() [{
+    "Dyad": {
+      "placement": {"icon": {"x1": 600, "y1": 950, "x2": 700, "y2": 1050, "rot": -90}}
+    }
+  }]
+  # Connector of actuator output signal
+  y = RealOutput() [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "output", "x1": 1300, "y1": 300, "x2": 1400, "y2": 400}}
+    }
+  }]
+end

@@ -1,0 +1,20 @@
+test component StepTest
+  terminator = Terminator()
+  signal = Step(height=1.4, offset=0.5, start_time=0.5)
+relations
+  connect(signal.y, terminator.u)
+metadata {
+  "Dyad": {
+    "tests": {
+      "case1": {
+        "stop": 1,
+        "expect": {
+          "initial": {"signal.y": 0.5},
+          "signals": ["signal.y", "terminator.u"],
+          "final": {"signal.y": 1.9, "terminator.u": 1.9}
+        }
+      }
+    }
+  }
+}
+end

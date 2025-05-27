@@ -1,0 +1,16 @@
+test component SlewRateLimiterTest
+  limiter = SlewRateLimiter(rising=1, falling=-1, td=0.001)
+  sine = Sine(amplitude=2, frequency=2)
+relations
+  connect(sine.y, limiter.u)
+metadata {
+  "Dyad": {
+    "tests": {
+      "case1": {
+        "stop": 1,
+        "expect": {"signals": ["limiter.y"], "final": {"limiter.y": -0.040594643}}
+      }
+    }
+  }
+}
+end

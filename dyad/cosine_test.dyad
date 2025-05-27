@@ -1,0 +1,21 @@
+test component CosineTest
+  integrator = Integrator()
+  signal = Cosine(amplitude=1, frequency=2, start_time=0.5, offset=0.5, phase=3.14)
+relations
+  connect(signal.y, integrator.u)
+metadata {
+  "Dyad": {
+    "tests": {
+      "case1": {
+        "stop": 5,
+        "atol": {"signal.y": 0.001, "integrator.x": 0.001},
+        "expect": {
+          "initial": {"signal.y": 0.5},
+          "signals": ["signal.y", "integrator.x"],
+          "final": {"signal.y": -0.49999, "integrator.x": 2.45255}
+        }
+      }
+    }
+  }
+}
+end

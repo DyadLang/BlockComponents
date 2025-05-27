@@ -1,0 +1,32 @@
+# Output the sum of the three scalar inputs.
+component Add3
+  u1 = RealInput() [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "input1", "x1": -50, "y1": 150, "x2": 50, "y2": 250}}
+    }
+  }]
+  u2 = RealInput() [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "input2", "x1": -50, "y1": 450, "x2": 50, "y2": 550}}
+    }
+  }]
+  u3 = RealInput() [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "input3", "x1": -50, "y1": 750, "x2": 50, "y2": 850}}
+    }
+  }]
+  y = RealOutput() [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "output", "x1": 950, "y1": 450, "x2": 1050, "y2": 550}}
+    }
+  }]
+  # Gain of `u1`
+  parameter k1::Real = 1.0
+  # Gain of `u2`
+  parameter k2::Real = 1.0
+  # Gain of `u3`
+  parameter k3::Real = 1.0
+relations
+  y = k1*u1+k2*u2+k3*u3
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/Add3.svg"}}}
+end

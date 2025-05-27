@@ -1,0 +1,7 @@
+# Output difference between reference in (in1) and feedback in (in2).
+component Feedback
+  extends SI2SO
+relations
+  y = u1-u2
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/Feedback.svg"}}}
+end

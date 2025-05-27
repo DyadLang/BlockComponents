@@ -1,0 +1,21 @@
+test component RampTest
+  integrator = Integrator()
+  signal = Ramp(duration=0.7, height=1.0, start_time=0.5, offset=0.5)
+relations
+  connect(signal.y, integrator.u)
+metadata {
+  "Dyad": {
+    "tests": {
+      "case1": {
+        "stop": 3,
+        "atol": {"integrator.x": 0.001},
+        "expect": {
+          "initial": {"signal.y": 0.5},
+          "signals": ["signal.y", "integrator.x"],
+          "final": {"signal.y": 1.5, "integrator.x": 3.641}
+        }
+      }
+    }
+  }
+}
+end

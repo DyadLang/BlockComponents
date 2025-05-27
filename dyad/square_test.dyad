@@ -1,0 +1,21 @@
+test component SquareTest
+  integrator = Integrator()
+  signal = Square(amplitude=1, frequency=2, start_time=0.5, offset=0.7)
+relations
+  connect(signal.y, integrator.u)
+metadata {
+  "Dyad": {
+    "tests": {
+      "case1": {
+        "stop": 5,
+        "atol": {"integrator.x": 0.001},
+        "expect": {
+          "initial": {"signal.y": 0.7},
+          "signals": ["signal.y", "integrator.x"],
+          "final": {"signal.y": 1.7, "integrator.x": 3.53706}
+        }
+      }
+    }
+  }
+}
+end

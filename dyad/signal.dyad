@@ -1,0 +1,5 @@
+partial component Signal
+  extends SO
+  parameter start_time::Time = 0.0
+  parameter offset::Real = 0.0
+end

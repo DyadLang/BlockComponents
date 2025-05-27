@@ -1,0 +1,8 @@
+component Terminator
+  u = RealInput() [{
+    "Dyad": {
+      "placement": {"icon": {"iconName": "input", "x1": -50, "y1": 450, "x2": 50, "y2": 550}}
+    }
+  }]
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/Terminator.svg"}}}
+end

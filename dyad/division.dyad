@@ -1,0 +1,7 @@
+# Output first input divided by second input.
+component Division
+  extends SI2SO
+relations
+  y = u1/u2
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/Division.svg"}}}
+end
