@@ -1,0 +1,21 @@
+test component ContinuousClockTest
+  integrator = Integrator()
+  signal = ContinuousClock(start_time=0.5, offset=1.0)
+relations
+  connect(signal.y, integrator.u)
+metadata {
+  "Dyad": {
+    "tests": {
+      "case1": {
+        "stop": 5,
+        "atol": {"integrator.x": 0.001},
+        "expect": {
+          "initial": {"signal.y": 1},
+          "signals": ["signal.y", "integrator.x"],
+          "final": {"signal.y": 5.5, "integrator.x": 15.11887}
+        }
+      }
+    }
+  }
+}
+end

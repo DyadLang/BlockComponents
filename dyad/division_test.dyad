@@ -1,0 +1,11 @@
+test component DivisionTest
+  c1 = Constant(k=3)
+  c2 = Constant(k=2)
+  division = Division()
+relations
+  connect(division.u1, c1.y)
+  connect(division.u2, c2.y)
+metadata {
+  "Dyad": {"tests": {"case1": {"stop": 5, "expect": {"final": {"division.y": 1.5}}}}}
+}
+end

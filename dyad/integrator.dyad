@@ -1,0 +1,15 @@
+# Outputs `y = ∫k*u dt`, corresponding to the transfer function ``1/s``.
+component Integrator
+  extends SISO
+  # State of Integrator
+  variable x::Real
+  # Initial value of the integrator state
+  parameter x0::Real = 0
+  # Gain
+  parameter k::Real = 1.0
+relations
+  initial x = x0
+  der(x) = k*u
+  y = x
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/Integrator.svg"}}}
+end

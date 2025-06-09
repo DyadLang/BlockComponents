@@ -1,0 +1,13 @@
+# Limits the slew rate within the range of `falling` and `rising` rates.
+component SlewRateLimiter
+  extends SISO
+  # Maximum rising slew rate
+  parameter rising::DecayConstant
+  # Maximum falling slew rate
+  parameter falling::DecayConstant = -rising
+  # Time derivative constant
+  parameter td::Time
+relations
+  initial y = u
+  der(y) = clamp((u-y)/td, falling, rising)
+end

@@ -1,0 +1,8 @@
+# Generate step signal.
+component Step
+  extends Signal
+  parameter height::Real
+relations
+  y = if time>=start_time then height+offset else offset
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/Step.svg"}}}
+end

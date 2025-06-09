@@ -1,0 +1,18 @@
+test component LimiterTest
+  limiter = Limiter(y_max=3, y_min=-3)
+  integrator = Integrator()
+  sine = Sine(amplitude=4*π, frequency=1)
+relations
+  connect(sine.y, integrator.u)
+  connect(integrator.y, limiter.u)
+metadata {
+  "Dyad": {
+    "tests": {
+      "case1": {
+        "stop": 1,
+        "expect": {"signals": ["limiter.y"], "final": {"limiter.y": 0.000086636306}}
+      }
+    }
+  }
+}
+end

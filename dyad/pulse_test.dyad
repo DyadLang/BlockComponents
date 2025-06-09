@@ -1,0 +1,20 @@
+test component PulseTest
+  integrator = Integrator()
+  signal = Pulse(amplitude=1.5, duty_cycle=0.5, offset=0.75, period=0.75, start_time=0.5)
+relations
+  connect(signal.y, integrator.u)
+metadata {
+  "Dyad": {
+    "tests": {
+      "case1": {
+        "stop": 3,
+        "expect": {
+          "initial": {"signal.y": 0.75},
+          "signals": ["signal.y", "integrator.x"],
+          "final": {"signal.y": 0.75, "integrator.x": 2.24999999}
+        }
+      }
+    }
+  }
+}
+end

@@ -1,0 +1,13 @@
+# Output the product of a gain value with the input signal.
+component Gain
+  extends SISO
+  parameter k::Real
+relations
+  y = k*u
+metadata {
+  "Dyad": {
+    "labels": [{"label": "k=$(k)", "x": 500, "y": 500, "rot": 0}],
+    "icons": {"default": "dyad://BlockComponents/Gain.svg"}
+  }
+}
+end

@@ -1,0 +1,58 @@
+# Gives simple inputs to the Sine and Cosine with variable frequency/amplitude
+#
+# To use, run the test and plot sine_wave.y, cosine_wave.y.
+# The Ramp and Constant component can be exchanged by any other signal source.
+component VariableSinCosTest 
+  sine_wave = SineVariableFrequencyAndAmplitude() [
+    { "Dyad": { "placement": { "icon": { "x1": 600, "y1": 100, "x2": 800, "y2": 300 , "rot": 0 } } } }
+  ]
+  cos_wave = CosineVariableFrequencyAndAmplitude() [
+    { "Dyad": { "placement": { "icon": { "x1": 600, "y1": 400, "x2": 800, "y2": 600 , "rot": 0 } } } }
+  ]
+  # Amplitude
+  amplitude_source = BlockComponents.Ramp(start_time = 0, offset=2, duration=3, height=-2) [
+    { "Dyad": { "placement": { "icon": { "x1": 0, "y1": 100, "x2": 200, "y2": 300 , "rot": 0 } } } }
+  ]
+  # Frequency
+  frequency_source = BlockComponents.Constant(k=2) [
+    { "Dyad": { "placement": { "icon": { "x1": 0, "y1": 400, "x2": 200, "y2": 600 , "rot": 0 } } } }
+  ]
+relations  
+  connect(amplitude_source.y, sine_wave.amplitude, cos_wave.amplitude) [{
+    "Dyad": {
+      "edges": [
+        {"S": -1, "E": 1},
+        {"S": -1, "M": [{"x": 300, "y": 160}], "E": 2},
+        {"S": -1, "M": [{"x": 300, "y": 460}], "E": 3}
+      ],
+      "junctions": [
+        {"x": 300, "y": 200}
+      ]
+    }
+  }]
+  connect(frequency_source.y, sine_wave.frequency, cos_wave.frequency) [{
+    "Dyad": {
+      "edges": [
+        {"S": -1, "E": 1},
+        {"S": -1, "M": [{"x": 400, "y": 240}], "E": 2},
+        {"S": -1, "M": [{"x": 400, "y": 540}], "E": 3}
+      ],
+      "junctions": [
+        {"x": 400, "y": 500}
+      ]
+    }
+  }]
+metadata {
+  "Dyad": {
+    "tests": {
+      "case1": {
+        "stop": 10,
+        "signals": [
+          "sine_wave.y",
+          "cos_wave.y"
+        ]
+      }
+    }
+  }
+}
+end

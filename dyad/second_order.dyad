@@ -1,0 +1,29 @@
+# A second-order filter with gain `k`, a bandwidth of `w` rad/s and relative damping `d`. The transfer function
+# is given by `Y(s)/U(s) = `
+#
+# ```
+# k*w^2
+# ─────────────────
+# s² + 2d*w*s + w^2
+# ```
+#
+# Critical damping corresponds to `d=1`, which yields the fastest step response without overshoot, `d < 1` results in an underdamped filter while `d > 1` results in an overdamped filter.
+# `d = 1/√2` corresponds to a Butterworth filter of order 2 (maximally flat frequency response).
+component SecondOrder
+  extends SISO
+  # State of SecondOrder filter
+  variable x::Real
+  # Derivative state of SecondOrder filter
+  variable xd::Real
+  # Gain
+  parameter k::Real = 1.0
+  # Bandwidth (angular frequency)
+  parameter w::Real = 1.0
+  # Relative damping
+  parameter d::Real = 1.0
+relations
+  der(x) = xd
+  der(xd) = w*(w*(k*u-x)-2*d*xd)
+  y = x
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/SecondOrder.svg"}}}
+end

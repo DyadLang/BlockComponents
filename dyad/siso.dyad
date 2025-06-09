@@ -1,0 +1,10 @@
+# Single input single output (SISO) continuous system block.
+
+partial component SISO
+  u = RealInput() [
+    { "Dyad": { "placement": { "icon": { "iconName": "input", "x1": -50, "y1": 450, "x2": 50, "y2": 550 } } } }
+  ]
+  y = RealOutput() [
+    { "Dyad": { "placement": { "icon": { "iconName": "output", "x1": 950, "y1": 450, "x2": 1050, "y2": 550 } } } }
+  ]
+end

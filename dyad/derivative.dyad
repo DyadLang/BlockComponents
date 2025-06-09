@@ -1,0 +1,27 @@
+# Outputs an approximate derivative of the input. The transfer function of this block is
+#
+# ```
+# k      k        ks
+# ─ - ─────── = ──────
+# T   sT² + T   sT + 1
+# ```
+#
+# and a state-space realization is given by `ss(-1/T, 1/T, -k/T, k/T)`
+# where `T` is the time constant of the filter.
+# A smaller `T` leads to a more ideal approximation of the derivative.
+component Derivative
+  extends SISO
+  # Derivative-filter state
+  variable x::Real
+  # Initial value of the derivative-filter state
+  parameter x0::Real = 0
+  # Time constant
+  parameter T::Real
+  # Gain
+  parameter k::Real = 1.0
+relations
+  initial x = x0
+  der(x) = (u-x)/T
+  y = (k/T)*(u-x)
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/Derivative.svg"}}}
+end

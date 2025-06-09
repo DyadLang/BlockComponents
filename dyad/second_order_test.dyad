@@ -1,0 +1,19 @@
+test component SecondOrderTest
+  c = Constant(k=1)
+  pt2 = SecondOrder(k=1.0, w=1.0, d=0.5)
+relations
+  connect(c.y, pt2.u)
+metadata {
+  "Dyad": {
+    "experiments": {},
+    "tests": {
+      "case1": {
+        "stop": 10,
+        "initial": {"pt2.xd": 0},
+        "atol": {"pt2.y": 0.01},
+        "expect": {"final": {"pt2.y": 1}, "signals": ["pt2.y"]}
+      }
+    }
+  }
+}
+end

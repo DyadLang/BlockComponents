@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="a" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .b{stroke:#8f8f8f;stroke-linejoin:round;fill:none;stroke-width:8px}
+    </style>
+  </defs>
+  <path fill="#fff" stroke-width="0" d="M4 4h992v992H4z"/>
+  <path fill="#84bfed" stroke-width="0" d="M992 8v984H8V8zm8-8H0v1000h1000z"/>
+  <path d="M100.19 822.81v-21.26m155.21 21.26v-21.26m159.41 21.26v-21.26m159.42 21.26v-21.26m159.41 21.26v-21.26m163.47 21.26v-21.26m2.66 1.54H96.56" class="b"/>
+  <path fill="none" stroke="#5757db" stroke-miterlimit="10" stroke-width="8" d="M497.39 198.12h406.65"/>
+  <path fill="none" stroke="#5757db" stroke-miterlimit="10" stroke-width="7.95" d="M99.29 803.43h402"/>
+  <path d="M487.54 197.66h21.26m-21.26 542.26h21.26m-19.44-216.9h21.27m-21.27-108.45h21.27m-21.27-108.45h21.27m-23.09 325.35h21.26m-1.54 173.66V194.04" class="b"/>
+</svg>

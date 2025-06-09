@@ -1,0 +1,7 @@
+# Output product of the two inputs.
+component Product
+  extends SI2SO
+relations
+  y = u1*u2
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/Product.svg"}}}
+end

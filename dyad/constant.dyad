@@ -1,0 +1,13 @@
+# Generate constant signal.
+component Constant
+  extends SO
+  parameter k::Real
+relations
+  y = k
+metadata {
+  "Dyad": {
+    "labels": [{"label": "k = $(k)", "x": 500, "y": 1100, "rot": 0}],
+    "icons": {"default": "dyad://BlockComponents/Constant.svg"}
+  }
+}
+end

@@ -1,0 +1,14 @@
+component Pulse
+  extends Signal
+  parameter amplitude::Real
+  parameter duty_cycle::Real
+  parameter period::Time
+relations
+  y = if time > start_time then
+    if time <= start_time + duty_cycle * period then
+        amplitude
+      else
+        offset
+    else
+      offset
+end

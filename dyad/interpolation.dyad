@@ -1,0 +1,13 @@
+type RealInterpolator = func(::Real)::Real
+
+type DyadDataset = Native
+
+component Interpolation
+  u = RealInput()
+  y = RealOutput()
+  structural parameter dataset::DyadDataset
+  structural parameter interpolation_type::Real
+  final parameter interpolator::RealInterpolator = dataset_interpolation(interpolation_type, dataset)
+relations
+  y = interpolator(u)
+end

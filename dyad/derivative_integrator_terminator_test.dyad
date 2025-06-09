@@ -1,0 +1,25 @@
+test component DerivativeIntegratorTerminatorTest
+  derivative = Derivative(k=1, T=0.001)
+  integrator = Integrator(k=1)
+  terminator = Terminator()
+  source = Sine(amplitude=1, frequency=1)
+relations
+  connect(source.y, derivative.u)
+  connect(derivative.y, integrator.u)
+  connect(integrator.y, terminator.u)
+metadata {
+  "Dyad": {
+    "experiments": {},
+    "tests": {
+      "case1": {
+        "stop": 10,
+        "atol": {"integrator.y": 0.01, "terminator.u": 0.01},
+        "expect": {
+          "final": {"integrator.y": 0, "terminator.u": 0},
+          "signals": ["integrator.y", "terminator.u"]
+        }
+      }
+    }
+  }
+}
+end

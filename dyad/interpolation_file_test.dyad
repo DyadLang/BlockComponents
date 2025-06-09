@@ -1,0 +1,10 @@
+
+test component InterpolationFileTest
+  interp = Interpolation(interpolation_type=LinearInterpolation, dataset=dataset)
+  structural parameter dataset::DyadDataset = DyadDataset("data/interp_square_data.csv", dependent_vars=["data"], independent_var="ts")
+  variable y::Real
+relations
+  interp.u = time
+  interp.y = y
+metadata {"Dyad": {"tests": {"case1": {"stop": 0.1, "expect": {"signals": ["y"]}}}}}
+end

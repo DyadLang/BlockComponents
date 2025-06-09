@@ -1,0 +1,12 @@
+# Two single input and one single output
+partial component SI2SO
+  u1 = RealInput() [{
+    "Dyad": {"placement": {"icon": {"x1": -50, "y1": 150, "x2": 50, "y2": 250}}}
+  }]
+  u2 = RealInput() [{
+    "Dyad": {"placement": {"icon": {"x1": -50, "y1": 750, "x2": 50, "y2": 850}}}
+  }]
+  y = RealOutput() [{
+    "Dyad": {"placement": {"icon": {"x1": 950, "y1": 450, "x2": 1050, "y2": 550}}}
+  }]
+end

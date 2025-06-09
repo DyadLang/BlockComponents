@@ -1,0 +1,16 @@
+test component LimPIDTest
+  pid = LimPID(Td=0.1, Ti=0.5, y_max=1, y_min=-1, wp=1, wd=0, Nd=10, Ni=0.9, k_ff=1)
+  plant = Plant()
+  signal = Step(height=1)
+  signal_ff = Constant(k=1)
+relations
+  initial plant.x1 = 0
+  initial plant.y = 0
+  connect(signal.y, pid.u_s)
+  connect(plant.y, pid.u_m)
+  connect(pid.y, plant.u)
+  connect(pid.u_ff, signal_ff.y)
+metadata {
+  "Dyad": {"tests": {"case1": {"stop": 10, "expect": {"signals": ["plant.y", "pid.y"]}}}}
+}
+end

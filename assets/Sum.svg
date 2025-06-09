@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="a" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .b{fill:none;stroke:#000;stroke-linejoin:round;stroke-width:8px}
+    </style>
+  </defs>
+  <path fill="#fff" stroke-width="0" d="M4 4h992v992H4z"/>
+  <path fill="#84bfed" stroke-width="0" d="M992 8v984H8V8zm8-8H0v1000h1000z"/>
+  <path d="M51.03 502.05h180.59" class="b"/>
+  <path fill="#fff" stroke="#000" stroke-linejoin="round" stroke-width="8" d="M233.14 801.34h567v-600h-567s-7.16 607.16 0 600Z"/>
+  <path d="M965.15 504H801.14" class="b"/>
+  <text fill="#939598" font-family="GloberRegular,Glober" font-size="220" transform="translate(437.47 548.6)"><tspan x="0" y="0">∑</tspan></text>
+</svg>

@@ -1,0 +1,10 @@
+# Generate sine signal.
+component Sine
+  extends Signal
+  parameter amplitude::Real
+  parameter frequency::Frequency
+  parameter phase::Angle = 0.0
+relations
+  y = if start_time<time then offset+amplitude*sin(2*π*frequency*(time-start_time)+phase) else offset
+metadata {"Dyad": {"icons": {"default": "dyad://BlockComponents/Sine.svg"}}}
+end

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="a" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .b{fill:none;stroke:#000;stroke-linejoin:round;stroke-width:8px}
+    </style>
+  </defs>
+  <path fill="#fff" stroke-width="0" d="M4 4h992v992H4z"/>
+  <path fill="#84bfed" stroke-width="0" d="M992 8v984H8V8zm8-8H0v1000h1000z"/>
+  <path d="M51.03 502.05h300.26m149.97 147.27v300.26" class="b"/>
+  <circle cx="499.48" cy="501.64" r="146.24" class="b"/>
+  <path d="M965.15 504H648.69" class="b"/>
+  <text fill="#939598" font-family="GloberRegular,Glober" font-size="220" transform="translate(714.35 813.55)"><tspan x="0" y="0">-</tspan></text>
+</svg>
