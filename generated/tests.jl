@@ -5,7 +5,6 @@
 ### Instead, update the Dyad source code and regenerate this file
 
 using ModelingToolkit
-using OrdinaryDiffEqDefault
 using RuntimeGeneratedFunctions
 RuntimeGeneratedFunctions.init(@__MODULE__)
 
